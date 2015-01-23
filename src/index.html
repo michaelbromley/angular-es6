@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--<html ng-app="app" ng-controller="AppController as vm">-->
+<html ng-controller="AppController as vm">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>AngularJS & ES6 Demo: A Pleasing Array of Items</title>
+
+    <!-- inject:css -->
+    <!-- endinject -->
+
+</head>
+<body>
+
+<h1>A Pleasing Array of Items</h1>
+
+<item-selector collection="vm.items"></item-selector>
+
+{{ vm.selection.length }}
+<button ng-show="vm.selection.length">Please Me</button>
+
+<script data-main="app/main.js" src="../bower_components/requirejs/require.js"></script>
+<!--<script>
+    require(['app/app.js']);
+</script>-->
+<!-- inject:js -->
+<!-- endinject -->
+</body>
+</html>

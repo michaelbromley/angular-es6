@@ -1,0 +1,6 @@
+.selectable {
+  cursor: pointer;
+}
+.selectable.selected {
+  font-weight: bold;
+}
