@@ -1,8 +1,3 @@
-import * as register from '../utils/annotations';
-import itemsService from '../services/itemsService';
-
-console.log('appController.js');
-
 /**
  * The one and only controller used in this app.
  */
@@ -13,7 +8,7 @@ class AppController {
         vm.items = [];
         vm.selection = [];
 
-        itemsService.getItems().then( result =>  vm.items = result.data );
+        itemsService.getItems().then( result =>  vm.items = result );
 
         $scope.$watch('vm.items', () => {
             vm.selection = vm.items.filter(item => item.selected);
@@ -21,6 +16,5 @@ class AppController {
     }
 
 }
-register.controller('AppController', AppController);
 
-export default AppController;
+register.controller('AppController', AppController);

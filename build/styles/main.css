@@ -1,6 +1,20 @@
+.items-selector ul li {
+  list-style-type: none;
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #eee;
+  margin: 5px;
+  padding: 5px;
+  transition: border-color 0.3s;
+}
+.items-selector ul li:hover {
+  border-color: #999;
+}
 .selectable {
   cursor: pointer;
 }
 .selectable.selected {
   font-weight: bold;
+  border-color: red;
 }

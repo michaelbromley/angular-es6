@@ -1,15 +1,21 @@
-define(["exports", "module", "angular"], function (exports, module, _angular) {
-  "use strict";
+"use strict";
 
-  var _interopRequire = function (obj) {
-    return obj && (obj["default"] || obj);
-  };
+var app = angular.module("app", []);
+var register = new Annotations(app);
 
-  var angular = _interopRequire(_angular);
+app.constant("config", {
+  apiUrl: "../api/"
+});
+/*
+app.config(($injector) => {
+    register = new Annotations(app, $injector);
+});*/
 
-  //import AppController from 'controllers/appController';
+/*app.run(($injector) => {
+    register = new Annotations(app, $injector);
+});*/
 
-  var app = angular.module("app", []);
 
-  module.exports = app;
+angular.element(document).ready(function () {
+  angular.bootstrap(document, ["app"]);
 });

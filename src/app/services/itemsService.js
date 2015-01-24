@@ -1,20 +1,30 @@
-import * as register from '../utils/annotations';
-
 /**
  * Provides access to the JSON endpoint which contains the data about the items.
  */
 class ItemsService {
 
-    constructor($http) {
+    constructor($http, config) {
         this.$http = $http;
+        this.config = config;
     }
 
     getItems() {
-        return this.$http.get('../api/items');
+        var apiUrl = this.config.apiUrl;
+
+        return this.$http
+            .get(apiUrl + 'items')
+            .then((result) => {
+                // prepend the API url to the images
+                return result.data.map((item) => {
+
+                    item.image = apiUrl + item.image;
+                    item.thumb = apiUrl + item.thumb;
+                    return item;
+
+                });
+            });
     }
 
 }
 
 register.service('itemsService', ItemsService);
-
-export default ItemsService;

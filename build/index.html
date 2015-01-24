@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--<html ng-app="app" ng-controller="AppController as vm">-->
 <html ng-controller="AppController as vm">
+
 <head lang="en">
     <meta charset="UTF-8">
     <title>AngularJS & ES6 Demo: A Pleasing Array of Items</title>
@@ -14,16 +14,23 @@
 
 <h1>A Pleasing Array of Items</h1>
 
-<item-selector collection="vm.items"></item-selector>
+<item-selector collection="vm.items" ng-hide="showMe"></item-selector>
 
-{{ vm.selection.length }}
-<button ng-show="vm.selection.length">Please Me</button>
+<button ng-show="vm.selection.length && !showMe" ng-click="showMe = true">Please Me</button>
 
-<script data-main="app/main.js" src="../bower_components/requirejs/require.js"></script>
-<!--<script>
-    require(['app/app.js']);
-</script>-->
+<item-display collection="vm.selection" ng-show="showMe" start="showMe"></item-display>
+
+
 <!-- inject:js -->
+<script src="../bower_components/angular/angular.js"></script>
+<script src="app/utils/annotations.js"></script>
+<script src="app/app.js"></script>
+<script src="app/controllers/appController.js"></script>
+<script src="app/directives/item.js"></script>
+<script src="app/directives/itemDisplay.js"></script>
+<script src="app/directives/itemSelector.js"></script>
+<script src="app/directives/selectable.js"></script>
+<script src="app/services/itemsService.js"></script>
 <!-- endinject -->
 </body>
 </html>

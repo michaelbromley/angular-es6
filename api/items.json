@@ -1,14 +1,22 @@
 [
   {
-    "name" : "Cheese"
+    "name" : "Cheese",
+    "image" : "images/cheese.png",
+    "thumb" : "images/cheese-thumb.png"
   },
   {
-    "name" : "Jumpers"
+    "name" : "Jumpers",
+    "image" : "images/jumper.png",
+    "thumb" : "images/jumper-thumb.png"
   },
   {
-    "name" : "Cats"
+    "name" : "Cats",
+    "image" : "images/cat.png",
+    "thumb" : "images/cat-thumb.png"
   },
   {
-    "name" : "Lightning"
+    "name" : "Toasters",
+    "image" : "images/toaster.png",
+    "thumb" : "images/toaster-thumb.png"
   }
 ]

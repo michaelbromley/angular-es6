@@ -6,15 +6,15 @@ var less = require('gulp-less');
 
 gulp.task('scripts', function () {
     return gulp.src('./src/**/*.js')
-        .pipe(to5({ modules: "amd" }))
+        .pipe(to5())
         .pipe(annotate())
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('mainjs', ['scripts'], function() {
-    return gulp.src('./src/**/main.js')
+/*gulp.task('mainjs', ['scripts'], function() {
+    return gulp.src('./src*//**//*main.js')
         .pipe(gulp.dest('./build'));
-});
+});*/
 
 gulp.task('styles', function() {
     return gulp.src('./src/**/*.less')
@@ -22,15 +22,15 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('index', ['mainjs', 'scripts', 'styles'], function() {
+gulp.task('index', ['scripts', 'styles'], function() {
 
     var target = gulp.src('./src/index.html');
 
     var js = gulp.src([
-        //'../bower_components/angular/angular.js',
-        //'app/utils/annotations.js',
-        //'app/app.js',
-        //'**/!(app.js)'
+        '../bower_components/angular/angular.js',
+        'app/utils/annotations.js',
+        'app/app.js',
+        '**/!(app.js)'
         ], {read: false, cwd: './src/'});
 
     var css = gulp.src([
