@@ -45,8 +45,8 @@ var ItemDirective = (function () {
     move: {
       value: function move(element) {
         var newPos = this.getNewPosition();
-        element.css("left", newPos.x + "px");
-        element.css("top", newPos.y + "px");
+        element.css("left", newPos.x - 150 + "px");
+        element.css("top", newPos.y - 150 + "px");
       },
       writable: true,
       enumerable: true,
