@@ -16,14 +16,14 @@
 
 <item-selector collection="vm.items" ng-hide="showMe"></item-selector>
 
-<button ng-show="vm.selection.length && !showMe" ng-click="showMe = true">Please Me</button>
+<button ng-show="vm.selection.length && !showMe" ng-click="showMe = true">Get Pleasure</button>
 
 <item-display collection="vm.selection" ng-show="showMe" start="showMe"></item-display>
 
 
 <!-- inject:js -->
 <script src="../bower_components/angular/angular.js"></script>
-<script src="app/utils/annotations.js"></script>
+<script src="app/utils/register.js"></script>
 <script src="app/app.js"></script>
 <script src="app/controllers/appController.js"></script>
 <script src="app/directives/item.js"></script>

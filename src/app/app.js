@@ -1,6 +1,6 @@
 
 var app = angular.module('app', []);
-var register = new Annotations(app);
+var register = new Register(app);
 
 app.constant('config', {
     apiUrl: '../api/'

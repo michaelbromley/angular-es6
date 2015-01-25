@@ -3,7 +3,7 @@
 This is a project that I am using to explore some ways of writing AngularJS apps using ES6 features. This is experimental
 and not intended for production use, or even as a recommendation of a good way of doing things.
 
-This is also my first foray into writing ES6 code, so forgive any silly mistakes or oversights. Feedback is welcome.
+This is also my first foray into writing ES6 code, so forgive any silly mistakes or oversights.
 
 ## Motivation
 
@@ -14,9 +14,18 @@ The general idea is to use classes and remove the Angular boilerplate wherever p
 
 These patterns could also prove useful in TypeScript projects, which use the same class syntax as ES6.
 
+## Feedback
+
+Is this a sensible way of writing an Angular app? Are there any major problems I have overlooked with this approach?
+Could you improve upon it?
+
+Open an issue and let me know! I am keen to hear what other Angular devs think of this stuff.
+
 ## Explanation
 
 In this demo, I have made a simple app with a few directives, a controller, and a service.
+
+### Controllers & Services
 
 For controllers and services, the pattern is very simple. Here is the Angular 2.0 example from the ngEurope talk:
 
@@ -50,10 +59,10 @@ angular.module('app')
     .controller('MyController', MyClass); // or .service('myService', MyClass);
 ```
 
-This works because Angular treats the functions passed to the `controller()` and `service()` methods as
-constructor functions, and instantiates them with `new`.
+This works because Angular treats the functions passed to the `module.controller()` and `module.service()` methods as
+constructor functions, and instantiates them with `new` (see [the docs on this](https://docs.angularjs.org/api/ng/type/angular.Module))
 
-## Directives
+### Directives
 
 Here is the example of a directive definition in Angular 2.0:
 
@@ -70,7 +79,7 @@ class SantaTodoApp {
 ```
 
 In Angular 1.x, defining directives as a class presents
- a problem, since the `directive()` method expects a factory function, rather than a constructor.
+ a problem, since the `module.directive()` method expects a factory function, rather than a constructor.
 
  To get around this, I have been experimenting with a way to take a class definition for a directive, and then
  dynamically construct a factory function that is of the format the Angular expects.
@@ -117,7 +126,7 @@ To convert this into a factory function that Angular 1.x can use, we need two th
 
 1. The constructor function needs to have it's dependencies defined via the `$inject` property. This can be added manually, or in the case
 of this project, it is added in a build step by the ng-annotate task.
-2. A method is needed to read those dependencies, and inject them as arguments into a factory function that we will give to Angular's `directive()` method.
+2. A method is needed to read those dependencies, and inject them as arguments into a factory function that we will give to Angular's `module.directive()` method.
 
 Here is my attempt to do this, with comments to explain what is going on:
 
@@ -150,6 +159,21 @@ factory.push((...args) => {
     return this._construct(constructorFn, args);
 });
 
-this.app.directive(name, factory); // register the directive with the Angular app
+angular.module('app').directive(name, factory); // register the directive with the Angular app
 ```
 
+## The `Register` Utility
+
+This is all wrapped up in a utility class named `Register` - [see the source here](src/app/utils/register.js), which
+provides a simplified and consistent API over the top of `angular.module`:
+
+```JavaScript
+register.directive('itemSelector', ItemSelectorDirective);
+```
+
+## To Do
+
+* I initially attempted to use ES6 modules, but I had trouble getting it to work. Probably due to my own inexperience with requirejs. This is
+a major ES6 feature that would need to be incorporated.
+* I have not yet attempted to make a wrapper for factories or providers. If a factory is declared as a class, it may be indistinguishable from
+a service and therefore it might not make sense to use both. Providers would require a bit more work to integrate.

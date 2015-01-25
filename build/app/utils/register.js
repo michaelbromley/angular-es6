@@ -8,13 +8,13 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
 /**
  * A helper class to simplify registering Angular components and provide a consistent syntax for doing so.
  */
-var Annotations = (function () {
-  function Annotations(appModule) {
+var Register = (function () {
+  function Register(appModule) {
     this.app = appModule;
     //this.$injector = $injector;
   }
 
-  _prototypeProperties(Annotations, null, {
+  _prototypeProperties(Register, null, {
     directive: {
       value: function directive(name, constructorFn) {
         var _this = this;
@@ -126,5 +126,5 @@ var Annotations = (function () {
     }
   });
 
-  return Annotations;
+  return Register;
 })();

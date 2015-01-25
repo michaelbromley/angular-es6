@@ -8,7 +8,7 @@ class ItemDisplayDirective {
         this.restrict = 'E';
         this.replace = true;
         this.scope = {
-            collection: '=',
+            collection: '=', 
             start: '='
         }
     }

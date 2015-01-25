@@ -4,7 +4,7 @@
 class ItemSelectorDirective {
 
     constructor($timeout) {
-        this.template = '<div class="items-selector">Select your favourite items: <ul>' +
+        this.template = '<div class="items-selector">Which ones please you the most?<ul>' +
                             '<li ng-repeat="item in collection" selectable="item">' +
                                 '<img ng-src="{{ item.thumb }}" class="item-thumb" />' +
                                 '<span class="item-name">{{ item.name }}</span>' +

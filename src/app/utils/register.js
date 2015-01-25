@@ -1,7 +1,7 @@
 /**
  * A helper class to simplify registering Angular components and provide a consistent syntax for doing so.
  */
-class Annotations {
+class Register {
 
     constructor(appModule) {
         this.app = appModule;

@@ -28,7 +28,7 @@ gulp.task('index', ['scripts', 'styles'], function() {
 
     var js = gulp.src([
         '../bower_components/angular/angular.js',
-        'app/utils/annotations.js',
+        'app/utils/register.js',
         'app/app.js',
         '**/!(app.js)'
         ], {read: false, cwd: './src/'});
