@@ -28,9 +28,12 @@ class Annotations {
             });
 
         }
-        
+
+        // get the array of dependencies that are needed by this directive
         var args = constructorFn.$inject || [];
-        var factory = args.slice();
+        var factory = args.slice(); // create a copy of the array
+        // The `factory` array uses Angular's array notation whereby each element of the array is the name of a
+        // dependency, and the final item is the factory function itself.
         factory.push((...args) => {
             return this._construct(constructorFn, args);
         });
@@ -68,7 +71,7 @@ class Annotations {
     }
 
     /**
-     * This function allows us to call a constructor function with arbitrary arguments.
+     * This function allows us to instantiate constructor function with arbitrary arguments.
      * From http://stackoverflow.com/a/1608546/772859
      * @param constructor
      * @param args
