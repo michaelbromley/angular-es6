@@ -32,3 +32,9 @@ button {
   transition: all 1s;
   mix-blend-mode: multiply;
 }
+.footer {
+  position: absolute;
+  bottom: 30px;
+  display: block;
+  width: 100%;
+}

@@ -5,6 +5,8 @@ and not intended for production use, or even as a recommendation of a good way o
 
 This is also my first foray into writing ES6 code, so forgive any silly mistakes or oversights.
 
+### [View the demo in action](http://www.michaelbromley.co.uk/experiments/angular-es6-demo/build/)
+
 ## Motivation
 
 Attempt to approach the style given in previews of Angular 2.0, e.g [this slide from Igor Minar & Tobias Bosch's presentation
