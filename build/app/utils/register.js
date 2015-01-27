@@ -11,7 +11,6 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
 var Register = (function () {
   function Register(appModule) {
     this.app = appModule;
-    //this.$injector = $injector;
   }
 
   _prototypeProperties(Register, null, {
@@ -38,10 +37,10 @@ var Register = (function () {
 
         // get the array of dependencies that are needed by this directive
         var args = constructorFn.$inject || [];
-        var factory = args.slice(); // create a copy of the array
+        var factoryArray = args.slice(); // create a copy of the array
         // The `factory` array uses Angular's array notation whereby each element of the array is the name of a
         // dependency, and the final item is the factory function itself.
-        factory.push(function () {
+        factoryArray.push(function () {
           for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
           }
@@ -49,7 +48,7 @@ var Register = (function () {
           return _this._construct(constructorFn, args);
         });
 
-        this.app.directive(name, factory);
+        this.app.directive(name, factoryArray);
       },
       writable: true,
       enumerable: true,
@@ -66,6 +65,16 @@ var Register = (function () {
     service: {
       value: function service(name, contructorFn) {
         this.app.service(name, contructorFn);
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    provider: {
+      value: function provider(name, constructorFn) {
+        this.app.provider(name, function () {
+          return new constructorFn();
+        });
       },
       writable: true,
       enumerable: true,

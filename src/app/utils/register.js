@@ -5,7 +5,6 @@ class Register {
 
     constructor(appModule) {
         this.app = appModule;
-        //this.$injector = $injector;
     }
 
 
@@ -31,14 +30,14 @@ class Register {
 
         // get the array of dependencies that are needed by this directive
         var args = constructorFn.$inject || [];
-        var factory = args.slice(); // create a copy of the array
+        var factoryArray = args.slice(); // create a copy of the array
         // The `factory` array uses Angular's array notation whereby each element of the array is the name of a
         // dependency, and the final item is the factory function itself.
-        factory.push((...args) => {
+        factoryArray.push((...args) => {
             return this._construct(constructorFn, args);
         });
 
-        this.app.directive(name, factory);
+        this.app.directive(name, factoryArray);
     }
 
     controller(name, contructorFn) {
@@ -47,6 +46,10 @@ class Register {
 
     service(name, contructorFn) {
         this.app.service(name, contructorFn);
+    }
+
+    provider(name, constructorFn) {
+        this.app.provider(name, () => new constructorFn());
     }
 
     /**
