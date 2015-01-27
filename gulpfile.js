@@ -3,18 +3,22 @@ var inject = require('gulp-inject');
 var to5 = require('gulp-6to5');
 var annotate = require('gulp-ng-annotate');
 var less = require('gulp-less');
+var ts = require('gulp-typescript');
+var es = require('event-stream');
 
 gulp.task('scripts', function () {
-    return gulp.src('./src/**/*.js')
-        .pipe(to5())
+    var javascripts = gulp.src('./src/**/*.js')
+        .pipe(to5());
+
+    var typescripts = gulp.src('./src/**/*.ts')
+        .pipe(ts({
+            target: 'ES5'
+        }));
+
+    es.merge(typescripts.js, javascripts)
         .pipe(annotate())
         .pipe(gulp.dest('./build'));
 });
-
-/*gulp.task('mainjs', ['scripts'], function() {
-    return gulp.src('./src*//**//*main.js')
-        .pipe(gulp.dest('./build'));
-});*/
 
 gulp.task('styles', function() {
     return gulp.src('./src/**/*.less')
@@ -31,7 +35,7 @@ gulp.task('index', ['scripts', 'styles'], function() {
         'app/utils/register.js',
         'app/app.js',
         '**/!(app.js)'
-        ], {read: false, cwd: './src/'});
+        ], {read: false, cwd: './build/'});
 
     var css = gulp.src([
         'styles/main.css'
@@ -45,7 +49,7 @@ gulp.task('index', ['scripts', 'styles'], function() {
 
 gulp.task('watch', ['index'], function () {
 
-    gulp.watch('./src/**/*.js', ['scripts']);
+    gulp.watch(['./src/**/*.js', './src/**/*.ts'], ['scripts']);
     gulp.watch('./src/**/*.less', ['styles']);
     gulp.watch('./src/index.html', ['index']);
 
