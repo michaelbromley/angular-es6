@@ -10,23 +10,26 @@ class Register {
 
     directive(name, constructorFn) {
 
-        if (constructorFn.prototype.compile) {
 
-            var originalCompileFn = this._cloneFunction(constructorFn.prototype.compile);
-
-            // Decorate the compile method to automatically return the link method (if it exists)
-            // and bind it to the context of the constructor (so `this` works correctly).
-            // This gets around the problem of a non-lexical "this" which occurs when the directive class itself
-            // returns `this.link` from within the compile function.
-            this._override(constructorFn.prototype, 'compile', function (original) {
-                return function () {
-                    originalCompileFn.apply(this, arguments);
-
-                    return constructorFn.prototype.link.bind(this);
-                };
-            });
-
+        if (!constructorFn.prototype.compile) {
+            constructorFn.prototype.compile = () => {};
         }
+
+        var originalCompileFn = this._cloneFunction(constructorFn.prototype.compile);
+
+        // Decorate the compile method to automatically return the link method (if it exists)
+        // and bind it to the context of the constructor (so `this` works correctly).
+        // This gets around the problem of a non-lexical "this" which occurs when the directive class itself
+        // returns `this.link` from within the compile function.
+        this._override(constructorFn.prototype, 'compile', function () {
+            return function () {
+                originalCompileFn.apply(this, arguments);
+
+                if (constructorFn.prototype.link) {
+                    return constructorFn.prototype.link.bind(this);
+                }
+            };
+        });
 
         // get the array of dependencies that are needed by this directive
         var args = constructorFn.$inject || [];

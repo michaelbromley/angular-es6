@@ -30,11 +30,17 @@ button {
 }
 .item {
   transition: all 1s;
-  mix-blend-mode: multiply;
 }
 .footer {
   position: absolute;
   bottom: 30px;
   display: block;
   width: 100%;
+}
+.state-label {
+  position: relative;
+  z-index: 10;
+  font-size: 32px;
+  color: darkgreen;
+  background-color: rgba(255, 255, 255, 0.5);
 }

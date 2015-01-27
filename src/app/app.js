@@ -5,16 +5,8 @@ var register = new Register(app);
 app.constant('config', {
     apiUrl: '../api/'
 });
-/*
-app.config(($injector) => {
-    register = new Annotations(app, $injector);
-});*/
-
-/*app.run(($injector) => {
-    register = new Annotations(app, $injector);
-});*/
 
 
-angular.element(document).ready(function() {
-    angular.bootstrap(document, ['app']);
+app.config((statesProvider) => {
+    statesProvider.setPrefix('You are feeling');
 });

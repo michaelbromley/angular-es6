@@ -11,7 +11,7 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
 var StatesProvider = (function () {
   function StatesProvider() {
     this.prefix = "You are";
-    this.states = ["okay", "chuffed", "highly pleased"];
+    this.states = ["okay", "contented", "quite satisfied", "moderately gratified", "well chuffed", "highly pleased", "highly pleased indeed"];
   }
 
   _prototypeProperties(StatesProvider, null, {
@@ -34,22 +34,24 @@ var StatesProvider = (function () {
        * The `$get` method is a requirement of the Angular provider registration API, and is a factory function that
        * returns our service object.
        *
-       * @param $q
-       * @param $timeout
-       * @returns {{getStates: Function, getPrefix: Function}}
+       * @returns {{getNextState: Function, getPrefix: Function}}
        */
-      value: function $get($q, $timeout) {
+      value: function $get() {
         var _this = this;
-        this.$q = $q;
+        var index = 0;
 
         return {
-          getStates: function () {
-            // completely needless use of a promise, just to show that the $q & $timeout dependencies are working correctly
-            var deferred = _this.$q.defer();
-            $timeout(function () {
-              return deferred.resolve(_this.states);
-            }, 100);
-            return deferred.promise;
+          getNextState: function () {
+            var currentState;
+
+            if (index < _this.states.length) {
+              currentState = _this.states[index];
+            } else {
+              currentState = _this.states[_this.states.length - 1];
+            }
+
+            index++;
+            return currentState;
           },
           getPrefix: function () {
             return _this.prefix;

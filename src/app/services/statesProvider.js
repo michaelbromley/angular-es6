@@ -5,7 +5,7 @@ class StatesProvider {
 
     constructor() {
         this.prefix = "You are";
-        this.states = ['okay', 'chuffed', 'highly pleased'];
+        this.states = ['okay', 'contented', 'quite satisfied', 'moderately gratified', 'well chuffed', 'highly pleased', 'highly pleased indeed'];
     }
 
     /**
@@ -20,19 +20,23 @@ class StatesProvider {
      * The `$get` method is a requirement of the Angular provider registration API, and is a factory function that
      * returns our service object.
      *
-     * @param $q
-     * @param $timeout
-     * @returns {{getStates: Function, getPrefix: Function}}
+     * @returns {{getNextState: Function, getPrefix: Function}}
      */
-    $get($q, $timeout) {
-        this.$q = $q;
+    $get() {
+        var index = 0;
 
         return {
-            getStates: () => {
-                // completely needless use of a promise, just to show that the $q & $timeout dependencies are working correctly
-                var deferred = this.$q.defer();
-                $timeout(() => deferred.resolve(this.states), 100);
-                return deferred.promise;
+            getNextState: () => {
+                var currentState;
+
+                if (index < this.states.length) {
+                    currentState = this.states[index];
+                } else {
+                    currentState = this.states[this.states.length - 1];
+                }
+
+                index ++;
+                return currentState;
             },
             getPrefix: () => this.prefix
         };
