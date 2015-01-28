@@ -85,6 +85,16 @@ var Register = (function () {
       enumerable: true,
       configurable: true
     },
+    factory: {
+      value: function factory(name, constructorFn) {
+        this.app.factory(name, function () {
+          return constructorFn;
+        });
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
     _cloneFunction: {
 
       /**

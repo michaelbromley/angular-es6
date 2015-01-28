@@ -14,13 +14,15 @@ class ItemDirective {
     compile(tElement) {
 
         tElement.css('position', 'absolute');
+        tElement.css('left', (window.innerWidth / 2 - 150) + 'px');
+        tElement.css('top', (window.innerHeight / 2 - 150) + 'px');
 
-        //return this.link.bind(this);
     }
 
     link(scope, element) {
 
-        this.$interval(() => this.move(element), 1000);
+        var interval = Math.random() * 500 + 800;
+        this.$interval(() => this.move(element), interval);
 
     }
 

@@ -22,8 +22,8 @@ var ItemDirective = (function () {
     compile: {
       value: function compile(tElement) {
         tElement.css("position", "absolute");
-
-        //return this.link.bind(this);
+        tElement.css("left", window.innerWidth / 2 - 150 + "px");
+        tElement.css("top", window.innerHeight / 2 - 150 + "px");
       },
       writable: true,
       enumerable: true,
@@ -34,9 +34,10 @@ var ItemDirective = (function () {
         var _this = this;
 
 
+        var interval = Math.random() * 500 + 800;
         this.$interval(function () {
           return _this.move(element);
-        }, 1000);
+        }, interval);
       },
       writable: true,
       enumerable: true,

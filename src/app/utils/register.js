@@ -55,6 +55,10 @@ class Register {
         this.app.provider(name, () => new constructorFn());
     }
 
+    factory(name, constructorFn) {
+        this.app.factory(name, () => constructorFn);
+    }
+
     /**
      * Clone a function
      * @param original

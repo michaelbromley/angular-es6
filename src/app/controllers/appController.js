@@ -3,16 +3,17 @@
  */
 class AppController {
 
-    constructor($scope, itemsService) {
-        var vm = this;
-        vm.items = [];
-        vm.selection = [];
+    constructor($scope, itemsService, Thing) {
+        this.items = [];
+        this.selection = [];
 
-        itemsService.getItems().then( result =>  vm.items = result );
+        itemsService.getItems().then( result =>  this.items = result );
 
         $scope.$watch('vm.items', () => {
-            vm.selection = vm.items.filter(item => item.selected);
+            this.selection = this.items.filter(item => item.selected);
         }, true);
+
+        this.makeThing = () => { new Thing() };
     }
 
 }
