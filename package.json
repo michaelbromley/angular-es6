@@ -1,0 +1,33 @@
+{
+  "name": "angular-es6",
+  "version": "1.0.0",
+  "description": "An experiment in using ES6 classes with AngularJS",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "event-stream": "^3.2.1",
+    "gulp": "^3.8.10",
+    "gulp-less": "^2.0.1",
+    "gulp-inject": "^1.1.1",
+    "gulp-6to5": "^2.0.2",
+    "gulp-ng-annotate": "^0.5.0",
+    "gulp-typescript": "^2.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelbromley/angular-es6.git"
+  },
+  "keywords": [
+    "angularjs",
+    "es6"
+  ],
+  "author": "Michael Bromley <michael@michaelbromley.co.uk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michaelbromley/angular-es6/issues"
+  },
+  "homepage": "https://github.com/michaelbromley/angular-es6"
+}
