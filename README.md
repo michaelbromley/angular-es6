@@ -2,8 +2,8 @@
 
 An example approach to using ES6 classes in an AngularJS 1.x app.
 
-#### Please see the article [Exploring ES6 Classes In AngularJS 1.x](http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x) for
-a full explanation.
+**Please see the article [Exploring ES6 Classes In AngularJS 1.x](http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x) for
+a full explanation.**
 
 ## register.js
 
