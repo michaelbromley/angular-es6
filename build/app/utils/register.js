@@ -17,9 +17,10 @@ var _toArray = function (arr) {
  */
 function register(appName) {
   var directive = function (name, constructorFn) {
-
+    constructorFn = _normalizeConstructor(constructorFn);
 
     if (!constructorFn.prototype.compile) {
+      // create an empty compile function if none was defined.
       constructorFn.prototype.compile = function () {};
     }
 
@@ -42,23 +43,52 @@ function register(appName) {
     var factoryArray = _createFactoryArray(constructorFn);
 
     app.directive(name, factoryArray);
+    return this;
   };
 
   var controller = function (name, contructorFn) {
     app.controller(name, contructorFn);
+    return this;
   };
 
   var service = function (name, contructorFn) {
     app.service(name, contructorFn);
+    return this;
   };
 
   var provider = function (name, constructorFn) {
     app.provider(name, constructorFn);
+    return this;
   };
 
   var factory = function (name, constructorFn) {
+    constructorFn = _normalizeConstructor(constructorFn);
     var factoryArray = _createFactoryArray(constructorFn);
     app.factory(name, factoryArray);
+    return this;
+  };
+
+  /**
+   * If the constructorFn is an array of type ['dep1', 'dep2', ..., constructor() {}]
+   * we need to pull out the array of dependencies and add it as an $inject property of the
+   * actual constructor function.
+   * @param input
+   * @returns {*}
+   * @private
+   */
+  var _normalizeConstructor = function (input) {
+    var constructorFn;
+
+    if (input.constructor === Array) {
+      //
+      var injected = input.slice(0, input.length - 1);
+      constructorFn = input[input.length - 1];
+      constructorFn.$inject = injected;
+    } else {
+      constructorFn = input;
+    }
+
+    return constructorFn;
   };
 
   /**
