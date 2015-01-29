@@ -1,7 +1,5 @@
 /**
- * In this case, a factory is being used to house an instantiable class which can be injected with Angular's DI system.
- * So in our controller, we can require `Thing` and then manually instantiate it by invoking `new Thing()` in the
- * controller code.
+ * A thing is an object which will be instantiated and returned by the ThingFactory
  */
 class Thing {
 
@@ -18,4 +16,19 @@ class Thing {
 
 }
 
-register.factory('Thing', Thing);
+/**
+ * The ThingFactory class creates new things
+ */
+class ThingFactory {
+
+    constructor($timeout) {
+        this.$timeout = $timeout;
+    }
+
+    newThing() {
+        console.log('Getting a new Thing...');
+        return this.$timeout(() => new Thing(), 100);
+    }
+}
+
+register.factory('thingFactory', ThingFactory);

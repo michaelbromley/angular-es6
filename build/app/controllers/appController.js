@@ -3,7 +3,7 @@
 /**
  * The one and only controller used in this app.
  */
-var AppController = function AppController($scope, itemsService, Thing) {
+var AppController = function AppController($scope, itemsService, thingFactory) {
   var _this = this;
   this.items = [];
   this.selection = [];
@@ -19,9 +19,12 @@ var AppController = function AppController($scope, itemsService, Thing) {
   }, true);
 
   this.makeThing = function () {
-    new Thing();
+    thingFactory.newThing();
   };
+
+
+  this.$inject = ["$scope", "itemService", "Thing"];
 };
-AppController.$inject = ["$scope", "itemsService", "Thing"];
+AppController.$inject = ["$scope", "itemsService", "thingFactory"];
 
 register.controller("AppController", AppController);

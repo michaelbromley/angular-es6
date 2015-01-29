@@ -12,15 +12,17 @@
 </head>
 <body>
 
-<h1 ng-click="vm.makeThing()">A Pleasing Array of Items</h1>
+<h1>A Pleasing Array of Items</h1>
 
 <state-display ng-show="showMe" start="showMe"></state-display>
 
 <item-selector collection="vm.items" ng-hide="showMe"></item-selector>
 
-<button ng-show="vm.selection.length && !showMe" ng-click="showMe = true">Get Pleasure</button>
+<button class="show-me" ng-show="vm.selection.length && !showMe" ng-click="showMe = true">Get Pleasure</button>
 
 <item-display collection="vm.selection" ng-show="showMe" start="showMe"></item-display>
+
+<button class="thing-button" ng-click="vm.makeThing()">Click here for things</button>
 
 
 <div class="footer">

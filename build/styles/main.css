@@ -23,13 +23,20 @@ html {
   font-weight: bold;
   border-color: red;
 }
-button {
+button.show-me {
   font-size: 24px;
   padding: 10px;
   border-radius: 8px;
 }
 .item {
   transition: all 1s;
+}
+button.thing-button {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  border-radius: 3px;
+  z-index: 50;
 }
 .footer {
   position: absolute;

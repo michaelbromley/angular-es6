@@ -3,7 +3,7 @@
  */
 class AppController {
 
-    constructor($scope, itemsService, Thing) {
+    constructor($scope, itemsService, thingFactory) {
         this.items = [];
         this.selection = [];
 
@@ -13,7 +13,10 @@ class AppController {
             this.selection = this.items.filter(item => item.selected);
         }, true);
 
-        this.makeThing = () => { new Thing() };
+        this.makeThing = () => { thingFactory.newThing() };
+
+
+        this.$inject = ['$scope', 'itemService', 'Thing'];
     }
 
 }

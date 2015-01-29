@@ -6,9 +6,7 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
 };
 
 /**
- * In this case, a factory is being used to house an instantiable class which can be injected with Angular's DI system.
- * So in our controller, we can require `Thing` and then manually instantiate it by invoking `new Thing()` in the
- * controller code.
+ * A thing is an object which will be instantiated and returned by the ThingFactory
  */
 var Thing = (function () {
   function Thing() {
@@ -32,4 +30,30 @@ var Thing = (function () {
   return Thing;
 })();
 
-register.factory("Thing", Thing);
+/**
+ * The ThingFactory class creates new things
+ */
+var ThingFactory = (function () {
+  function ThingFactory($timeout) {
+    this.$timeout = $timeout;
+  }
+  ThingFactory.$inject = ["$timeout"];
+
+  _prototypeProperties(ThingFactory, null, {
+    newThing: {
+      value: function newThing() {
+        console.log("Getting a new Thing...");
+        return this.$timeout(function () {
+          return new Thing();
+        }, 100);
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    }
+  });
+
+  return ThingFactory;
+})();
+
+register.factory("thingFactory", ThingFactory);
