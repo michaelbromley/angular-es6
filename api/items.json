@@ -18,5 +18,25 @@
     "name" : "Toasters",
     "image" : "images/toaster.png",
     "thumb" : "images/toaster-thumb.png"
+  },
+  {
+    "name" : "Durians",
+    "image" : "images/durian.png",
+    "thumb" : "images/durian-thumb.png"
+  },
+  {
+    "name" : "Tape Measures",
+    "image" : "images/tapemeasure.png",
+    "thumb" : "images/tapemeasure-thumb.png"
+  },
+  {
+    "name" : "Footballs",
+    "image" : "images/football.png",
+    "thumb" : "images/football-thumb.png"
+  },
+  {
+    "name" : "Bearings",
+    "image" : "images/bearing.png",
+    "thumb" : "images/bearing-thumb.png"
   }
 ]

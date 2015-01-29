@@ -30,7 +30,7 @@ class StateDisplayDirective {
 
         scope.$watch('start', (val) => {
             if (val) {
-                this.$interval(() => scope.currentState = this.states.getNextState(), 3000);
+                this.$interval(() => scope.currentState = this.states.getNextState(), 3500);
             }
         });
 

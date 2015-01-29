@@ -20,7 +20,7 @@ var StateDisplayDirective = (function () {
         scope.currentState = this.states.getNextState();
         scope.$watch('start', function (val) {
             if (val) {
-                _this.$interval(function () { return scope.currentState = _this.states.getNextState(); }, 3000);
+                _this.$interval(function () { return scope.currentState = _this.states.getNextState(); }, 3500);
             }
         });
     };

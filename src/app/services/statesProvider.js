@@ -5,7 +5,16 @@ class StatesProvider {
 
     constructor() {
         this.prefix = "You are";
-        this.states = ['okay', 'contented', 'quite satisfied', 'moderately gratified', 'well chuffed', 'highly pleased', 'highly pleased indeed'];
+        this.states = [
+            'okay',
+            'not too bad',
+            'contented',
+            'quite satisfied',
+            'moderately gratified',
+            'well chuffed',
+            'highly pleased',
+            'highly pleased indeed'
+        ];
     }
 
     /**

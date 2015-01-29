@@ -11,7 +11,7 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
 var StatesProvider = (function () {
   function StatesProvider() {
     this.prefix = "You are";
-    this.states = ["okay", "contented", "quite satisfied", "moderately gratified", "well chuffed", "highly pleased", "highly pleased indeed"];
+    this.states = ["okay", "not too bad", "contented", "quite satisfied", "moderately gratified", "well chuffed", "highly pleased", "highly pleased indeed"];
   }
 
   _prototypeProperties(StatesProvider, null, {

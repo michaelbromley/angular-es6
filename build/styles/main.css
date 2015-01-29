@@ -3,18 +3,27 @@ html {
   font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;
   text-align: center;
 }
+.items-selector {
+  width: 650px;
+  margin: auto;
+}
 .items-selector ul li {
   list-style-type: none;
   display: inline-block;
-  width: 100px;
+  width: 120px;
   text-align: center;
   border: 1px solid #eee;
   margin: 5px;
   padding: 5px;
   transition: border-color 0.3s;
+  font-size: 14px;
 }
 .items-selector ul li:hover {
   border-color: #999;
+}
+.items-selector ul li img {
+  display: block;
+  margin: auto;
 }
 .selectable {
   cursor: pointer;
@@ -47,7 +56,7 @@ button.thing-button {
 .state-label {
   position: relative;
   z-index: 10;
-  font-size: 32px;
+  font-size: 64px;
   color: darkgreen;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
 }
