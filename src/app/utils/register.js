@@ -31,14 +31,7 @@ class Register {
             };
         });
 
-        // get the array of dependencies that are needed by this directive
-        var args = constructorFn.$inject || [];
-        var factoryArray = args.slice(); // create a copy of the array
-        // The `factory` array uses Angular's array notation whereby each element of the array is the name of a
-        // dependency, and the final item is the factory function itself.
-        factoryArray.push((...args) => {
-            return this._construct(constructorFn, args);
-        });
+        var factoryArray = this._createFactoryArray(constructorFn);
 
         this.app.directive(name, factoryArray);
     }
@@ -52,11 +45,36 @@ class Register {
     }
 
     provider(name, constructorFn) {
-        this.app.provider(name, () => new constructorFn());
+        this.app.provider(name, constructorFn);
     }
 
     factory(name, constructorFn) {
-        this.app.factory(name, () => constructorFn);
+        var factoryArray = this._createFactoryArray(constructorFn);
+        this.app.factory(name, factoryArray);
+    }
+
+    /**
+     * Convert a constructor function into a factory function which returns a new instance of that
+     * constructor, with the correct dependencies automatically injected as arguments.
+     *
+     * In order to inject the dependencies, they must be attached to the constructor function with the
+     * `$inject` property annotation.
+     *
+     * @param constructorFn
+     * @returns {Array.<T>}
+     * @private
+     */
+    _createFactoryArray(constructorFn) {
+        // get the array of dependencies that are needed by this component (as contained in the `$inject` array)
+        var args = constructorFn.$inject || [];
+        var factoryArray = args.slice(); // create a copy of the array
+        // The factoryArray uses Angular's array notation whereby each element of the array is the name of a
+        // dependency, and the final item is the factory function itself.
+        factoryArray.push((...args) => {
+            return new constructorFn(...args);
+        });
+
+        return factoryArray;
     }
 
     /**
@@ -78,22 +96,6 @@ class Register {
      */
     _override(object, methodName, callback) {
         object[methodName] = callback(object[methodName])
-    }
-
-    /**
-     * This function allows us to instantiate constructor function with arbitrary arguments.
-     * From http://stackoverflow.com/a/1608546/772859
-     * @param constructor
-     * @param args
-     * @returns {Annotations._construct.F}
-     * @private
-     */
-    _construct(constructor, args) {
-        function F() {
-            return constructor.apply(this, args);
-        }
-        F.prototype = constructor.prototype;
-        return new F();
     }
 
 }

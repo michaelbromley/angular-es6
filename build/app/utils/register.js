@@ -1,5 +1,17 @@
 "use strict";
 
+var _applyConstructor = function (Constructor, args) {
+  var instance = Object.create(Constructor.prototype);
+
+  var result = Constructor.apply(instance, args);
+
+  return result != null && (typeof result == "object" || typeof result == "function") ? result : instance;
+};
+
+var _toArray = function (arr) {
+  return Array.isArray(arr) ? arr : Array.from(arr);
+};
+
 var _prototypeProperties = function (child, staticProps, instanceProps) {
   if (staticProps) Object.defineProperties(child, staticProps);
   if (instanceProps) Object.defineProperties(child.prototype, instanceProps);
@@ -16,8 +28,6 @@ var Register = (function () {
   _prototypeProperties(Register, null, {
     directive: {
       value: function directive(name, constructorFn) {
-        var _this = this;
-
 
 
         if (!constructorFn.prototype.compile) {
@@ -40,18 +50,7 @@ var Register = (function () {
           };
         });
 
-        // get the array of dependencies that are needed by this directive
-        var args = constructorFn.$inject || [];
-        var factoryArray = args.slice(); // create a copy of the array
-        // The `factory` array uses Angular's array notation whereby each element of the array is the name of a
-        // dependency, and the final item is the factory function itself.
-        factoryArray.push(function () {
-          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-          }
-
-          return _this._construct(constructorFn, args);
-        });
+        var factoryArray = this._createFactoryArray(constructorFn);
 
         this.app.directive(name, factoryArray);
       },
@@ -77,9 +76,7 @@ var Register = (function () {
     },
     provider: {
       value: function provider(name, constructorFn) {
-        this.app.provider(name, function () {
-          return new constructorFn();
-        });
+        this.app.provider(name, constructorFn);
       },
       writable: true,
       enumerable: true,
@@ -87,9 +84,41 @@ var Register = (function () {
     },
     factory: {
       value: function factory(name, constructorFn) {
-        this.app.factory(name, function () {
-          return constructorFn;
+        var factoryArray = this._createFactoryArray(constructorFn);
+        this.app.factory(name, factoryArray);
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    _createFactoryArray: {
+
+      /**
+       * Convert a constructor function into a factory function which returns a new instance of that
+       * constructor, with the correct dependencies automatically injected as arguments.
+       *
+       * In order to inject the dependencies, they must be attached to the constructor function with the
+       * `$inject` property annotation.
+       *
+       * @param constructorFn
+       * @returns {Array.<T>}
+       * @private
+       */
+      value: function CreateFactoryArray(constructorFn) {
+        // get the array of dependencies that are needed by this component (as contained in the `$inject` array)
+        var args = constructorFn.$inject || [];
+        var factoryArray = args.slice(); // create a copy of the array
+        // The factoryArray uses Angular's array notation whereby each element of the array is the name of a
+        // dependency, and the final item is the factory function itself.
+        factoryArray.push(function () {
+          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          return _applyConstructor(constructorFn, _toArray(args));
         });
+
+        return factoryArray;
       },
       writable: true,
       enumerable: true,
@@ -121,28 +150,6 @@ var Register = (function () {
        */
       value: function Override(object, methodName, callback) {
         object[methodName] = callback(object[methodName]);
-      },
-      writable: true,
-      enumerable: true,
-      configurable: true
-    },
-    _construct: {
-
-      /**
-       * This function allows us to instantiate constructor function with arbitrary arguments.
-       * From http://stackoverflow.com/a/1608546/772859
-       * @param constructor
-       * @param args
-       * @returns {Annotations._construct.F}
-       * @private
-       */
-      value: function Construct(constructor, args) {
-        var F = function () {
-          return constructor.apply(this, args);
-        };
-
-        F.prototype = constructor.prototype;
-        return new F();
       },
       writable: true,
       enumerable: true,
