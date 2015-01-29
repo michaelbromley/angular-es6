@@ -36,7 +36,8 @@ var StatesProvider = (function () {
        *
        * @returns {{getNextState: Function, getPrefix: Function}}
        */
-      value: function $get($timeout) {
+      /*@ngInject*/
+      value: ["$timeout", function $get($timeout) {
         var _this = this;
         var index = 0;
         $timeout(function () {
@@ -60,7 +61,7 @@ var StatesProvider = (function () {
             return _this.prefix;
           }
         };
-      },
+      }],
       writable: true,
       enumerable: true,
       configurable: true

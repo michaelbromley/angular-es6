@@ -13,10 +13,7 @@ class Selectable {
     }
 
     compile(tElement) {
-
         tElement.addClass('selectable');
-
-        return this.link;
     }
 
     link(scope, element, attrs) {
@@ -32,4 +29,4 @@ class Selectable {
 
 }
 
-register('app').directive('selectable', () =>  new Selectable() );
+register('app').directive('selectable', Selectable);

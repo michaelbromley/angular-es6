@@ -9,10 +9,12 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
  * Provides access to the JSON endpoint which contains the data about the items.
  */
 var ItemsService = (function () {
+  /*@ngInject*/
   function ItemsService($http, config) {
     this.$http = $http;
     this.config = config;
   }
+  ItemsService.$inject = ["$http", "config"];
 
   _prototypeProperties(ItemsService, null, {
     getItems: {

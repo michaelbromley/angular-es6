@@ -3,6 +3,7 @@
  */
 class ItemSelectorDirective {
 
+    /*@ngInject*/
     constructor($timeout) {
         this.template = '<div class="items-selector">Which ones please you the most?<ul>' +
                             '<li ng-repeat="item in collection" selectable="item">' +

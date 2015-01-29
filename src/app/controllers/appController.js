@@ -3,6 +3,7 @@
  */
 class AppController {
 
+    /*@ngInject*/
     constructor($scope, itemsService, thingFactory) {
         this.items = [];
         this.selection = [];

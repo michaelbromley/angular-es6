@@ -3,7 +3,10 @@
 /**
  * The one and only controller used in this app.
  */
-var AppController = function AppController($scope, itemsService, thingFactory) {
+var AppController =
+
+/*@ngInject*/
+["$scope", "itemsService", "thingFactory", function AppController($scope, itemsService, thingFactory) {
   var _this = this;
   this.items = [];
   this.selection = [];
@@ -24,6 +27,6 @@ var AppController = function AppController($scope, itemsService, thingFactory) {
 
 
   this.$inject = ["$scope", "itemService", "Thing"];
-};
+}];
 
 register("app").controller("AppController", AppController);

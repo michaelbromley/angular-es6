@@ -34,9 +34,11 @@ var Thing = (function () {
  * The ThingFactory class creates new things
  */
 var ThingFactory = (function () {
+  /*@ngInject*/
   function ThingFactory($timeout) {
     this.$timeout = $timeout;
   }
+  ThingFactory.$inject = ["$timeout"];
 
   _prototypeProperties(ThingFactory, null, {
     newThing: {

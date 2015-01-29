@@ -21,6 +21,7 @@ class Thing {
  */
 class ThingFactory {
 
+    /*@ngInject*/
     constructor($timeout) {
         this.$timeout = $timeout;
     }

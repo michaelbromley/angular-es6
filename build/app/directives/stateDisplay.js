@@ -2,6 +2,7 @@
  * A directive class written in TypeScript.
  */
 var StateDisplayDirective = (function () {
+    /*@ngInject*/
     function StateDisplayDirective($interval, states) {
         this.template = '<div class="state-label">{{ prefix }} {{ currentState }}</div>';
         this.restrict = 'E';
@@ -12,6 +13,7 @@ var StateDisplayDirective = (function () {
         this.$interval = $interval;
         this.states = states;
     }
+    StateDisplayDirective.$inject = ["$interval", "states"];
     StateDisplayDirective.prototype.link = function (scope) {
         var _this = this;
         scope.prefix = this.states.getPrefix();
@@ -22,7 +24,6 @@ var StateDisplayDirective = (function () {
             }
         });
     };
-    StateDisplayDirective.$inject = ['$interval', 'states'];
     return StateDisplayDirective;
 })();
 register('app').directive('stateDisplay', StateDisplayDirective);

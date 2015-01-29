@@ -22,8 +22,6 @@ var Selectable = (function () {
     compile: {
       value: function compile(tElement) {
         tElement.addClass("selectable");
-
-        return this.link;
       },
       writable: true,
       enumerable: true,
@@ -49,6 +47,4 @@ var Selectable = (function () {
   return Selectable;
 })();
 
-register("app").directive("selectable", function () {
-  return new Selectable();
-});
+register("app").directive("selectable", Selectable);

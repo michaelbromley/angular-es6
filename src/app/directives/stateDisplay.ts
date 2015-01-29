@@ -10,8 +10,7 @@ class StateDisplayDirective {
     private $interval;
     private states;
 
-
-    static $inject = ['$interval', 'states'];
+    /*@ngInject*/
     constructor($interval, states) {
         this.template = '<div class="state-label">{{ prefix }} {{ currentState }}</div>';
         this.restrict = 'E';
