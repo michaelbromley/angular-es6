@@ -5,6 +5,8 @@ An example approach to using ES6 classes in an AngularJS 1.x app.
 **Please see the article [Exploring ES6 Classes In AngularJS 1.x](http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x) for
 a full explanation.**
 
+**Working demo [here](http://www.michaelbromley.co.uk/experiments/angular-es6-demo/build/)**
+
 ## register.js
 
 The style of class definition you see below is enabled by including the file [register.js](src/app/utils/register.js) in the project, which exposes the global function `register`
@@ -88,14 +90,17 @@ class MyDirective {
         // elsewhere in the directive (e.g. compile or link function)
         this.$interval = $interval;
     }
+
     // optional compile function
     compile(tElement) {
         tElement.css('position', 'absolute');
     }
+
     // optional link function
     link(scope, element) {
         this.$interval(() => this.move(element), 1000);
     }
+
     move(element) {
         element.css('left', (Math.random() * 500) + 'px');
         element.css('top', (Math.random() * 500) + 'px');
