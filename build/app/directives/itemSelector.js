@@ -12,6 +12,5 @@ var ItemSelectorDirective = function ItemSelectorDirective($timeout) {
   };
   this.$timeout = $timeout;
 };
-ItemSelectorDirective.$inject = ["$timeout"];
 
-register.directive("itemSelector", ItemSelectorDirective);
+register("app").directive("itemSelector", ItemSelectorDirective);

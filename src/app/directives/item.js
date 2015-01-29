@@ -1,5 +1,6 @@
 class ItemDirective {
 
+    /*@ngInject*/
     constructor($interval, $timeout) {
         this.template = '<div class="item"><img ng-src="{{ model.image }}" /></div>';
         this.restrict = 'E';
@@ -46,4 +47,4 @@ class ItemDirective {
     }
 }
 
-register.directive('item', ItemDirective);
+register('app').directive('item', ItemDirective);

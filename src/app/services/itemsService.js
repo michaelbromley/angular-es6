@@ -27,4 +27,4 @@ class ItemsService {
 
 }
 
-register.service('itemsService', ItemsService);
+register('app').service('itemsService', ItemsService);

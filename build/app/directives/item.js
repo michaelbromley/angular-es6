@@ -6,6 +6,7 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
 };
 
 var ItemDirective = (function () {
+  /*@ngInject*/
   function ItemDirective($interval, $timeout) {
     this.template = "<div class=\"item\"><img ng-src=\"{{ model.image }}\" /></div>";
     this.restrict = "E";
@@ -77,4 +78,4 @@ var ItemDirective = (function () {
   return ItemDirective;
 })();
 
-register.directive("item", ItemDirective);
+register("app").directive("item", ItemDirective);

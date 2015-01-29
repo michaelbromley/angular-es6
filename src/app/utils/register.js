@@ -1,27 +1,32 @@
 /**
  * A helper class to simplify registering Angular components and provide a consistent syntax for doing so.
  */
-class Register {
+function register(appName) {
 
-    constructor(appModule) {
-        this.app = appModule;
-    }
+    var app = angular.module(appName);
 
+    return {
+        directive: directive,
+        controller: controller,
+        service: service,
+        provider: provider,
+        factory: factory
+    };
 
-    directive(name, constructorFn) {
+    function directive(name, constructorFn) {
 
 
         if (!constructorFn.prototype.compile) {
             constructorFn.prototype.compile = () => {};
         }
 
-        var originalCompileFn = this._cloneFunction(constructorFn.prototype.compile);
+        var originalCompileFn = _cloneFunction(constructorFn.prototype.compile);
 
         // Decorate the compile method to automatically return the link method (if it exists)
         // and bind it to the context of the constructor (so `this` works correctly).
         // This gets around the problem of a non-lexical "this" which occurs when the directive class itself
         // returns `this.link` from within the compile function.
-        this._override(constructorFn.prototype, 'compile', function () {
+        _override(constructorFn.prototype, 'compile', function () {
             return function () {
                 originalCompileFn.apply(this, arguments);
 
@@ -31,26 +36,26 @@ class Register {
             };
         });
 
-        var factoryArray = this._createFactoryArray(constructorFn);
+        var factoryArray = _createFactoryArray(constructorFn);
 
-        this.app.directive(name, factoryArray);
+        app.directive(name, factoryArray);
     }
 
-    controller(name, contructorFn) {
-        this.app.controller(name, contructorFn);
+    function controller(name, contructorFn) {
+        app.controller(name, contructorFn);
     }
 
-    service(name, contructorFn) {
-        this.app.service(name, contructorFn);
+    function service(name, contructorFn) {
+        app.service(name, contructorFn);
     }
 
-    provider(name, constructorFn) {
-        this.app.provider(name, constructorFn);
+    function provider(name, constructorFn) {
+        app.provider(name, constructorFn);
     }
 
-    factory(name, constructorFn) {
-        var factoryArray = this._createFactoryArray(constructorFn);
-        this.app.factory(name, factoryArray);
+    function factory(name, constructorFn) {
+        var factoryArray = _createFactoryArray(constructorFn);
+        app.factory(name, factoryArray);
     }
 
     /**
@@ -64,7 +69,7 @@ class Register {
      * @returns {Array.<T>}
      * @private
      */
-    _createFactoryArray(constructorFn) {
+    function _createFactoryArray(constructorFn) {
         // get the array of dependencies that are needed by this component (as contained in the `$inject` array)
         var args = constructorFn.$inject || [];
         var factoryArray = args.slice(); // create a copy of the array
@@ -82,7 +87,7 @@ class Register {
      * @param original
      * @returns {Function}
      */
-    _cloneFunction(original) {
+    function _cloneFunction(original) {
         return function() {
             return original.apply(this, arguments);
         };
@@ -94,7 +99,7 @@ class Register {
      * @param methodName
      * @param callback
      */
-    _override(object, methodName, callback) {
+    function _override(object, methodName, callback) {
         object[methodName] = callback(object[methodName])
     }
 

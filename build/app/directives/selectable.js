@@ -49,6 +49,6 @@ var Selectable = (function () {
   return Selectable;
 })();
 
-angular.module("app").directive("selectable", function () {
+register("app").directive("selectable", function () {
   return new Selectable();
 });

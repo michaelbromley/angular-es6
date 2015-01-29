@@ -21,4 +21,4 @@ class AppController {
 
 }
 
-register.controller('AppController', AppController);
+register('app').controller('AppController', AppController);

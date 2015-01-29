@@ -32,5 +32,4 @@ class Selectable {
 
 }
 
-angular.module('app')
-    .directive('selectable', () =>  new Selectable() );
+register('app').directive('selectable', () =>  new Selectable() );

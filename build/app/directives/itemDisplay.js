@@ -37,4 +37,4 @@ var ItemDisplayDirective = (function () {
   return ItemDisplayDirective;
 })();
 
-register.directive("itemDisplay", ItemDisplayDirective);
+register("app").directive("itemDisplay", ItemDisplayDirective);

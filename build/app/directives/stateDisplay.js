@@ -12,7 +12,6 @@ var StateDisplayDirective = (function () {
         this.$interval = $interval;
         this.states = states;
     }
-    StateDisplayDirective.$inject = ["$interval", "states"];
     StateDisplayDirective.prototype.link = function (scope) {
         var _this = this;
         scope.prefix = this.states.getPrefix();
@@ -23,6 +22,7 @@ var StateDisplayDirective = (function () {
             }
         });
     };
+    StateDisplayDirective.$inject = ['$interval', 'states'];
     return StateDisplayDirective;
 })();
-register.directive('stateDisplay', StateDisplayDirective);
+register('app').directive('stateDisplay', StateDisplayDirective);

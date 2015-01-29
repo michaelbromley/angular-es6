@@ -18,4 +18,4 @@ class ItemSelectorDirective {
     }
 }
 
-register.directive('itemSelector', ItemSelectorDirective);
+register('app').directive('itemSelector', ItemSelectorDirective);

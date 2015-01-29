@@ -31,4 +31,4 @@ class ThingFactory {
     }
 }
 
-register.factory('thingFactory', ThingFactory);
+register('app').factory('thingFactory', ThingFactory);

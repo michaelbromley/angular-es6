@@ -10,6 +10,8 @@ class StateDisplayDirective {
     private $interval;
     private states;
 
+
+    static $inject = ['$interval', 'states'];
     constructor($interval, states) {
         this.template = '<div class="state-label">{{ prefix }} {{ currentState }}</div>';
         this.restrict = 'E';
@@ -36,11 +38,8 @@ class StateDisplayDirective {
     }
 }
 
-/**
- * Declare the register object in order to avoid TypeScript compiler errors.
- */
-declare module register {
-    export function directive(name: string, constructorFn: any);
-}
 
-register.directive('stateDisplay', StateDisplayDirective);
+// Declare the register function in order to avoid TypeScript compiler errors.
+declare var register : any;
+
+register('app').directive('stateDisplay', StateDisplayDirective);

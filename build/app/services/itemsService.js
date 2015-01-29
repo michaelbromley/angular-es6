@@ -13,7 +13,6 @@ var ItemsService = (function () {
     this.$http = $http;
     this.config = config;
   }
-  ItemsService.$inject = ["$http", "config"];
 
   _prototypeProperties(ItemsService, null, {
     getItems: {
@@ -38,4 +37,4 @@ var ItemsService = (function () {
   return ItemsService;
 })();
 
-register.service("itemsService", ItemsService);
+register("app").service("itemsService", ItemsService);

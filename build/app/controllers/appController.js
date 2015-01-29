@@ -25,6 +25,5 @@ var AppController = function AppController($scope, itemsService, thingFactory) {
 
   this.$inject = ["$scope", "itemService", "Thing"];
 };
-AppController.$inject = ["$scope", "itemsService", "thingFactory"];
 
-register.controller("AppController", AppController);
+register("app").controller("AppController", AppController);

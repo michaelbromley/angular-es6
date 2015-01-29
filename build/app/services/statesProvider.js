@@ -70,4 +70,4 @@ var StatesProvider = (function () {
   return StatesProvider;
 })();
 
-register.provider("states", StatesProvider);
+register("app").provider("states", StatesProvider);

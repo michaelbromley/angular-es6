@@ -37,7 +37,6 @@ var ThingFactory = (function () {
   function ThingFactory($timeout) {
     this.$timeout = $timeout;
   }
-  ThingFactory.$inject = ["$timeout"];
 
   _prototypeProperties(ThingFactory, null, {
     newThing: {
@@ -56,4 +55,4 @@ var ThingFactory = (function () {
   return ThingFactory;
 })();
 
-register.factory("thingFactory", ThingFactory);
+register("app").factory("thingFactory", ThingFactory);
