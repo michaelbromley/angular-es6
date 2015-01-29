@@ -6,7 +6,7 @@ var _prototypeProperties = function (child, staticProps, instanceProps) {
 };
 
 var ItemDirective = (function () {
-  function ItemDirective($interval) {
+  function ItemDirective($interval, $timeout) {
     this.template = "<div class=\"item\"><img ng-src=\"{{ model.image }}\" /></div>";
     this.restrict = "E";
     this.replace = true;
@@ -15,13 +15,15 @@ var ItemDirective = (function () {
     };
 
     this.$interval = $interval;
+    this.$timeout = $timeout;
   }
-  ItemDirective.$inject = ["$interval"];
+  ItemDirective.$inject = ["$interval", "$timeout"];
 
   _prototypeProperties(ItemDirective, null, {
     compile: {
       value: function compile(tElement) {
         tElement.css("position", "absolute");
+        tElement.css("opacity", "0");
         tElement.css("left", window.innerWidth / 2 - 150 + "px");
         tElement.css("top", window.innerHeight / 2 - 150 + "px");
       },
@@ -35,6 +37,9 @@ var ItemDirective = (function () {
 
 
         var interval = Math.random() * 500 + 800;
+        this.$timeout(function () {
+          return element.css("opacity", "1");
+        }, 500);
         this.$interval(function () {
           return _this.move(element);
         }, interval);

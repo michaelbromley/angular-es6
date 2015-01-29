@@ -22,8 +22,9 @@ class StatesProvider {
      *
      * @returns {{getNextState: Function, getPrefix: Function}}
      */
-    $get() {
+    $get($timeout) {
         var index = 0;
+        $timeout(() => console.log('This is the statesProvider $get method being invoked.'), 100);
 
         return {
             getNextState: () => {

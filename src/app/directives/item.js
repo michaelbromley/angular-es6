@@ -1,6 +1,6 @@
 class ItemDirective {
 
-    constructor($interval) {
+    constructor($interval, $timeout) {
         this.template = '<div class="item"><img ng-src="{{ model.image }}" /></div>';
         this.restrict = 'E';
         this.replace = true;
@@ -9,11 +9,13 @@ class ItemDirective {
         };
 
         this.$interval = $interval;
+        this.$timeout = $timeout;
     }
 
     compile(tElement) {
 
         tElement.css('position', 'absolute');
+        tElement.css('opacity', '0');
         tElement.css('left', (window.innerWidth / 2 - 150) + 'px');
         tElement.css('top', (window.innerHeight / 2 - 150) + 'px');
 
@@ -22,6 +24,7 @@ class ItemDirective {
     link(scope, element) {
 
         var interval = Math.random() * 500 + 800;
+        this.$timeout(() => element.css('opacity', '1'), 500);
         this.$interval(() => this.move(element), interval);
 
     }

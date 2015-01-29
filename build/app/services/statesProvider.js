@@ -36,9 +36,12 @@ var StatesProvider = (function () {
        *
        * @returns {{getNextState: Function, getPrefix: Function}}
        */
-      value: function $get() {
+      value: function $get($timeout) {
         var _this = this;
         var index = 0;
+        $timeout(function () {
+          return console.log("This is the statesProvider $get method being invoked.");
+        }, 100);
 
         return {
           getNextState: function () {
