@@ -1,8 +1,11 @@
+/**
+ * A fairly fully-featured directive, including an external template file, dependencies, compile & link, isolate scope.
+ */
 class ItemDirective {
 
     /*@ngInject*/
     constructor($interval, $timeout) {
-        this.template = '<div class="item"><img ng-src="{{ model.image }}" /></div>';
+        this.templateUrl = 'app/directives/item.tpl.html';
         this.restrict = 'E';
         this.replace = true;
         this.scope = {
