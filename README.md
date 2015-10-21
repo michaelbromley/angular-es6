@@ -5,6 +5,8 @@ An example approach to using ES6 classes in an AngularJS 1.x app.
 **Please see the article [Exploring ES6 Classes In AngularJS 1.x](http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x) for
 a full explanation.**
 
+**Update, October 2015**: The material in this repo has been developed even further by others. If you want to write Angular 1.x apps in the Angular 2 style, please see the [ng-forward project](https://github.com/ngUpgraders/ng-forward), which unlike this repo, is under active development. 
+
 **Working demo [here](http://www.michaelbromley.co.uk/experiments/angular-es6-demo/build/)**
 
 ## register.js
